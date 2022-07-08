@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { privateRoutes, publicRoutes, RouteTypes } from '../routes'
+import { useAppSelector } from '../hooks/redux'
 
 const AppRouter = () => {
-  const isAuth: boolean = true
+  const currentUser = useAppSelector((state) => state.userReducer.user)
 
-  return isAuth ? (
+  return currentUser ? (
     <Routes>
       {privateRoutes.map((route) => (
         <Route
