@@ -15,4 +15,9 @@
   &:active {
     background-color: darken(#fff, 35%);
   }
+  
+  &:disabled {
+    background-color: darken(#fff, 50%);
+    color: #fff;
+  }
 }
