@@ -1,6 +1,4 @@
-import axios from 'axios'
 import { apiURL } from '../utils/api'
+import { HttpWorker } from '../utils/HttpWorker'
 
-export const host = axios.create({
-  baseURL: apiURL,
-})
+export const host = new HttpWorker(apiURL)
