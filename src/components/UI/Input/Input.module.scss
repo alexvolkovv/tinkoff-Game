@@ -2,10 +2,9 @@
   border-radius: 5px;
   outline: none;
   padding: 10px 15px;
-  display: block;
   border: 2px solid transparent;
-  width: 100%;
   transition: 0.1s all;
+  width: 100%;
   &:hover {
     box-shadow: 0 0 5px black;
   }
