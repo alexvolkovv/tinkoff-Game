@@ -13,7 +13,7 @@ export class HttpWorker {
     return url
   }
 
-  private createBaseOptions(methodName: string, body?: any) {
+  private createBaseOptions(methodName: string, body?: object) {
     const outputOptions: any = {
       method: methodName,
       headers: {
@@ -29,7 +29,7 @@ export class HttpWorker {
     return outputOptions
   }
 
-  async post<T>(url: string, body: any, config?: any): Promise<T> {
+  async post<T>(url: string, body: object, config?: object): Promise<T> {
     url = this.getUrl(url)
     const baseOptions = this.createBaseOptions('POST', body)
     const response = await fetch(url, { ...baseOptions, ...config })
@@ -37,7 +37,7 @@ export class HttpWorker {
     return (await response.json()) as T
   }
 
-  async put<T>(url: string, body: any, config?: any): Promise<T> {
+  async put<T>(url: string, body: object, config?: object): Promise<T> {
     url = this.getUrl(url)
     const baseOptions = this.createBaseOptions('PUT', body)
     const response = await fetch(url, { ...baseOptions, ...config })
@@ -45,7 +45,7 @@ export class HttpWorker {
     return (await response.json()) as T
   }
 
-  async get<T>(url: string, config?: any): Promise<T> {
+  async get<T>(url: string, config?: object): Promise<T> {
     url = this.getUrl(url)
     const baseOptions = this.createBaseOptions('GET')
     const response = await fetch(url, { ...baseOptions, ...config })
@@ -53,7 +53,7 @@ export class HttpWorker {
     return (await response.json()) as T
   }
 
-  async delete<T>(url: string, config?: any): Promise<T> {
+  async delete<T>(url: string, config?: object): Promise<T> {
     url = this.getUrl(url)
     const baseOptions = this.createBaseOptions('DELETE')
     const response = await fetch(url, { ...baseOptions, ...config })
