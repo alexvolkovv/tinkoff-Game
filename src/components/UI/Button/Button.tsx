@@ -6,7 +6,7 @@ type ButtonProps = {
   children?: React.ReactNode
 }
 
-export const Button: FC<ButtonProps> = ({ children, ...props }) => {
+export const Button: FC<ButtonProps> = React.memo(({ children, ...props }) => {
   const classes = props['className']
     ? styles.button + ' ' + props['className']
     : styles.button
@@ -16,4 +16,4 @@ export const Button: FC<ButtonProps> = ({ children, ...props }) => {
       {children}
     </button>
   )
-}
+})

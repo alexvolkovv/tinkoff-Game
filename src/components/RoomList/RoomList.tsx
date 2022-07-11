@@ -2,9 +2,18 @@ import React, { FC } from 'react'
 import styles from './RoomList.module.scss'
 import { RoomListItem } from './RoomListItem/RoomListItem'
 import { useAppSelector } from '../../hooks/redux'
+import { Loader } from '../UI/Loader/Loader'
 
 export const RoomList: FC = () => {
-  const { rooms } = useAppSelector((state) => state.roomsReducer)
+  const { rooms, isLoading } = useAppSelector((state) => state.roomsReducer)
+
+  if (isLoading) {
+    return (
+      <div className={styles.roomListLoading}>
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <div className={styles.roomList}>
