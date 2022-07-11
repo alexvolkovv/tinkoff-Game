@@ -1,14 +1,7 @@
-import React, {
-  ChangeEvent,
-  FC,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import styles from './CreateRoomModal.module.scss'
 import { Input } from '../../UI/Input/Input'
-import { Button } from '../../UI/Button/Button'
+import { Button, ButtonTypes } from '../../UI/Button/Button'
 
 type CreateRoomModalProps = {
   setModalVisible: (visible: boolean) => void
@@ -20,21 +13,21 @@ export const CreateRoomModal: FC<CreateRoomModalProps> = ({
   const [roomName, setRoomName] = useState<string>('')
   const roomNameRef = useRef<HTMLInputElement>()
 
-  function changeRoomName(event: ChangeEvent<HTMLInputElement>) {
+  const changeRoomName = (event: ChangeEvent<HTMLInputElement>) => {
     setRoomName(event.target.value)
   }
 
-  const cancelClick = useCallback(() => {
+  const cancelClick = () => {
     setModalVisible(false)
-  }, [])
+  }
 
-  const submitClick = useCallback(() => {
+  const submitClick = () => {
     if (!roomName) {
       return
     }
 
     setModalVisible(false)
-  }, [roomName])
+  }
 
   useEffect(() => {
     roomNameRef.current?.focus()
@@ -54,10 +47,16 @@ export const CreateRoomModal: FC<CreateRoomModalProps> = ({
         />
       </div>
       <div className={styles.footer}>
-        <Button onClick={cancelClick} className={styles.cancel}>
+        <Button
+          btnType={ButtonTypes.danger}
+          onClick={cancelClick}
+          className={styles.cancel}
+        >
           Отмена
         </Button>
-        <Button onClick={submitClick}>Создать</Button>
+        <Button btnType={ButtonTypes.grey} onClick={submitClick}>
+          Создать
+        </Button>
       </div>
     </div>
   )

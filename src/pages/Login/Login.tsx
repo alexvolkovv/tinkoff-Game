@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
 import styles from './Login.module.scss'
 import { Input } from '../../components/UI/Input/Input'
-import { Button } from '../../components/UI/Button/Button'
+import { Button, ButtonTypes } from '../../components/UI/Button/Button'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { createUser } from '../../store/reducers/user/actionCreators'
 
@@ -31,7 +31,12 @@ export const Login: FC = () => {
             setUserName(e.target.value)
           }
         />
-        <Button disabled={isLoading} type={'submit'} className={styles.submit}>
+        <Button
+          btnType={ButtonTypes.white}
+          disabled={isLoading}
+          type={'submit'}
+          className={styles.submit}
+        >
           OK
         </Button>
       </form>
