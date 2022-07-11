@@ -5,10 +5,10 @@ type InputProps = {
   [attribute: string]: any
 }
 
-export const Input: FC<InputProps> = ({ ...props }) => {
+export const Input: FC<InputProps> = React.memo(({ ...props }) => {
   let classes: string = props['className']
     ? props['className'] + ' ' + styles.input
     : styles.input
 
   return <input {...props} className={classes} />
-}
+})

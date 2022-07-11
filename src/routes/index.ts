@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 import { Login } from '../pages/Login/Login'
-import { Home } from '../pages/Home'
+import { Home } from '../pages/Home/Home'
 import { Game } from '../pages/Game'
 
 export type RouteType = {

@@ -1,0 +1,16 @@
+.roomList, .roomListLoading {
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 40vh;
+  overflow-y: auto;
+}
+
+.roomListLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
