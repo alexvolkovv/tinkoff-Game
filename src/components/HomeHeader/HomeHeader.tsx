@@ -14,14 +14,17 @@ export const HomeHeader = () => {
     dispatch(getRooms(searchQuery))
   }, 300)
 
-  const changeSearchValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value)
-    debouncedSearch(event.target.value)
-  }
+  const changeSearchValue = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(event.target.value)
+      debouncedSearch(event.target.value)
+    },
+    []
+  )
 
   const updateRooms = useCallback(() => {
     dispatch(getRooms(searchValue))
-  }, [])
+  }, [searchValue])
 
   return (
     <header className={styles.header}>
