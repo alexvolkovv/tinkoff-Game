@@ -3,15 +3,10 @@ import styles from './Modal.module.scss'
 
 type ModalProps = {
   setModalVisible: (visible: boolean) => void
-  visible: boolean
   children: ReactNode
 }
 
-export const Modal: FC<ModalProps> = ({
-  setModalVisible,
-  visible,
-  children,
-}) => {
+export const Modal: FC<ModalProps> = ({ setModalVisible, children }) => {
   const outsideClick = () => {
     setModalVisible(false)
   }
@@ -21,10 +16,7 @@ export const Modal: FC<ModalProps> = ({
   }
 
   return (
-    <div
-      className={[styles.modal, visible ? styles.active : ''].join(' ')}
-      onClick={outsideClick}
-    >
+    <div className={styles.modal} onClick={outsideClick}>
       <div className={styles.content} onClick={insideClick}>
         {children}
       </div>

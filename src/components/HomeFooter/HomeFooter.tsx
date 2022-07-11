@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styles from './HomeFooter.module.scss'
 import { Button } from '../UI/Button/Button'
 import { Modal } from '../UI/Modal/Modal'
+import { CreateRoomModal } from './CreateRoomModal/CreateRoomModal'
 
 export const HomeFooter = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false)
@@ -13,9 +14,11 @@ export const HomeFooter = () => {
   return (
     <div className={styles.footer}>
       <Button onClick={showModal}>Создать комнату</Button>
-      <Modal setModalVisible={setModalVisible} visible={modalVisible}>
-        test
-      </Modal>
+      {modalVisible && (
+        <Modal setModalVisible={setModalVisible}>
+          <CreateRoomModal setModalVisible={setModalVisible} />
+        </Modal>
+      )}
     </div>
   )
 }

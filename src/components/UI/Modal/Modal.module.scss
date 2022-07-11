@@ -10,8 +10,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  pointer-events: none;
   transition: 0.2s all;
   color: #000;
 }
@@ -20,16 +18,7 @@
   background-color: #fff;
   width: 50vw;
   border-radius: 10px;
-  transform: scale(0);
   transition: 0.2s all;
   padding: 20px;
-}
-
-.active {
-  opacity: 1;
-  pointer-events: all;
-  .content {
-    transform: scale(1);
-  }
 }
 
