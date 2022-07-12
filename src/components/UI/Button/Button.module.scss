@@ -6,7 +6,9 @@
   outline: none;
   background-color: #fff;
   transition: 0.2s all;
+}
 
+.button.white {
   &:hover {
     background-color: darken(#fff, 25%);
     color: #fff;
@@ -15,9 +17,42 @@
   &:active {
     background-color: darken(#fff, 35%);
   }
-  
+
   &:disabled {
     background-color: darken(#fff, 50%);
     color: #fff;
+  }
+}
+
+.button.danger {
+  background-color: red;
+  color: #fff;
+  &:hover {
+    background-color: darken(red, 10%);
+  }
+
+  &:active {
+    background-color: darken(red, 20%);
+  }
+
+  &:disabled {
+    background-color: darken(red, 25%);
+  }
+}
+
+.button.grey {
+  background-color: grey;
+  color: #fff;
+
+  &:hover {
+    background-color: darken(#fff, 25%);
+  }
+
+  &:active {
+    background-color: darken(#fff, 35%);
+  }
+
+  &:disabled {
+    background-color: darken(#fff, 50%);
   }
 }
