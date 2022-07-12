@@ -26,9 +26,9 @@
 
 .button.danger {
   background-color: red;
+  color: #fff;
   &:hover {
     background-color: darken(red, 10%);
-    color: #fff;
   }
 
   &:active {
@@ -37,16 +37,15 @@
 
   &:disabled {
     background-color: darken(red, 25%);
-    color: #fff;
   }
 }
 
 .button.grey {
   background-color: grey;
+  color: #fff;
 
   &:hover {
     background-color: darken(#fff, 25%);
-    color: #fff;
   }
 
   &:active {
@@ -55,6 +54,5 @@
 
   &:disabled {
     background-color: darken(#fff, 50%);
-    color: #fff;
   }
 }
