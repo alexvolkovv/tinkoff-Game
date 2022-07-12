@@ -17,7 +17,7 @@ export const HomeFooter = () => {
         Создать комнату
       </Button>
       {modalVisible && (
-        <Modal setModalVisible={setModalVisible}>
+        <Modal canExit={true} setModalVisible={setModalVisible}>
           <CreateRoomModal setModalVisible={setModalVisible} />
         </Modal>
       )}

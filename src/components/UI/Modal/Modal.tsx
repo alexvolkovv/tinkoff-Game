@@ -4,11 +4,18 @@ import styles from './Modal.module.scss'
 type ModalProps = {
   setModalVisible: (visible: boolean) => void
   children: ReactNode
+  canExit: boolean
 }
 
-export const Modal: FC<ModalProps> = ({ setModalVisible, children }) => {
+export const Modal: FC<ModalProps> = ({
+  setModalVisible,
+  children,
+  canExit,
+}) => {
   const outsideClick = () => {
-    setModalVisible(false)
+    if (canExit) {
+      setModalVisible(false)
+    }
   }
 
   const insideClick = (event: React.MouseEvent<HTMLDivElement>) => {
