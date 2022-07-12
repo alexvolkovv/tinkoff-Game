@@ -1,7 +1,7 @@
 import { ComponentType } from 'react'
 import { Login } from '../pages/Login/Login'
 import { Home } from '../pages/Home/Home'
-import { Game } from '../pages/Game'
+import { Room } from '../pages/Room/Room'
 
 export type RouteType = {
   path: string
@@ -12,7 +12,7 @@ export type RouteType = {
 export enum RouteTypes {
   LOGIN = '/login',
   HOME = '/',
-  GAME = '/game',
+  ROOM = '/room/:id',
 }
 
 export const publicRoutes: RouteType[] = [
@@ -30,8 +30,8 @@ export const privateRoutes: RouteType[] = [
     exact: true,
   },
   {
-    path: RouteTypes.GAME,
-    component: Game,
+    path: RouteTypes.ROOM,
+    component: Room,
     exact: true,
   },
 ]

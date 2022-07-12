@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
 
-export const Game: FC = () => {
+export const Room: FC = () => {
   return <div>Игра</div>
 }
