@@ -2,6 +2,11 @@ import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import styles from './CreateRoomModal.module.scss'
 import { Input } from '../../UI/Input/Input'
 import { Button, ButtonTypes } from '../../UI/Button/Button'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { LoadingModal } from '../../LoadingModal/LoadingModal'
+import { ErrorModal } from '../../ErrorModal/ErrorModal'
+import { createCurrentRoom } from '../../../store/reducers/currentRoom/actionCreators'
+import { Navigate } from 'react-router-dom'
 
 type CreateRoomModalProps = {
   setModalVisible: (visible: boolean) => void
@@ -12,7 +17,10 @@ export const CreateRoomModal: FC<CreateRoomModalProps> = ({
 }) => {
   const [roomName, setRoomName] = useState<string>('')
   const roomNameRef = useRef<HTMLInputElement>()
-
+  const { isLoading, error, currentRoom } = useAppSelector(
+    (state) => state.currentRoomReducer
+  )
+  const dispatch = useAppDispatch()
   const changeRoomName = (event: ChangeEvent<HTMLInputElement>) => {
     setRoomName(event.target.value)
   }
@@ -26,12 +34,24 @@ export const CreateRoomModal: FC<CreateRoomModalProps> = ({
       return
     }
 
-    setModalVisible(false)
+    dispatch(createCurrentRoom(roomName))
   }
 
   useEffect(() => {
     roomNameRef.current?.focus()
   }, [])
+
+  if (isLoading) {
+    return <LoadingModal />
+  }
+
+  if (error) {
+    return <ErrorModal error={error} setModalVisible={setModalVisible} />
+  }
+
+  if (currentRoom) {
+    return <Navigate to={'room/' + currentRoom.id} />
+  }
 
   return (
     <div>

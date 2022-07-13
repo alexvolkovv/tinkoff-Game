@@ -11,3 +11,14 @@ export const getCurrentRoom = createAsyncThunk(
     }
   }
 )
+
+export const createCurrentRoom = createAsyncThunk(
+  'currentRoom/createCurrentRoom',
+  async (name: string, thunkApi) => {
+    try {
+      return await RoomsService.createRoom(name)
+    } catch (e) {
+      return thunkApi.rejectWithValue('Не удалось создать комнату')
+    }
+  }
+)
