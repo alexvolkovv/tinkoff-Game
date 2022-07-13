@@ -9,4 +9,10 @@ export class RoomsService {
   static async getRoomById(id: number): Promise<RoomType> {
     return await host.get<RoomType>(`room/${id}`)
   }
+
+  static async createRoom(name: string): Promise<RoomType> {
+    return await host.post<RoomType>(`room`, {
+      name,
+    })
+  }
 }
