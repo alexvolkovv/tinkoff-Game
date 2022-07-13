@@ -1,6 +1,6 @@
 import { UserType } from '../../../models/UserType'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { createUser } from './actionCreators'
+import { changeUser, createUser } from './actionCreators'
 
 type UserState = {
   user: UserType | null
@@ -38,6 +38,28 @@ export const userSlice = createSlice({
 
     builder.addCase(
       createUser.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.isLoading = false
+        state.error = action.payload
+        alert(action.payload)
+      }
+    )
+
+    builder.addCase(changeUser.pending, (state) => {
+      state.isLoading = true
+    })
+
+    builder.addCase(
+      changeUser.fulfilled,
+      (state, action: PayloadAction<UserType>) => {
+        state.user = action.payload
+        state.isLoading = false
+        state.error = ''
+      }
+    )
+
+    builder.addCase(
+      changeUser.rejected,
       (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
