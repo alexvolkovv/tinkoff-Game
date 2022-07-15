@@ -2,6 +2,7 @@ import { host } from './index'
 import {
   ChangeGameRequest,
   GetGameRequest,
+  TakeRandomCardRequest,
 } from '../store/reducers/game/actionCreators'
 import { GameType } from '../models/GameType'
 
@@ -14,5 +15,11 @@ export class GameService {
 
   static async changeGame(data: ChangeGameRequest): Promise<GameType> {
     return await host.put<GameType>(`game`, data)
+  }
+
+  static async takeRandomCard(data: TakeRandomCardRequest): Promise<GameType> {
+    return await host.get<GameType>(
+      `game/card?userId=${data.userId}&gameId=${data.gameId}`
+    )
   }
 }

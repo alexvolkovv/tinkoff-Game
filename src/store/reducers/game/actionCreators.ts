@@ -12,6 +12,11 @@ export type ChangeGameRequest = {
   game: GameType
 }
 
+export type TakeRandomCardRequest = {
+  userId: number
+  gameId: number
+}
+
 export const getGame = createAsyncThunk(
   'game/getGame',
   async (data: GetGameRequest, thunkApi) => {
@@ -30,6 +35,17 @@ export const changeGame = createAsyncThunk(
       return await GameService.changeGame(data)
     } catch (e) {
       return thunkApi.rejectWithValue('Не удалось обновить игру')
+    }
+  }
+)
+
+export const takeRandomCard = createAsyncThunk(
+  'game/takeRandomCard',
+  async (data: TakeRandomCardRequest, thunkApi) => {
+    try {
+      return await GameService.takeRandomCard(data)
+    } catch (e) {
+      return thunkApi.rejectWithValue('Не удалось взять карту')
     }
   }
 )

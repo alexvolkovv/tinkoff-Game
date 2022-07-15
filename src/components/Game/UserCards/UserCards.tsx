@@ -25,6 +25,7 @@ export const UserCards: FC<UserCardsProps> = memo(
       const filteredCards = game.userCards.filter(
         (curCard) => curCard.id !== turnedCard.id
       )
+
       const newGame: GameType = {
         ...game,
         currentCard: turnedCard,

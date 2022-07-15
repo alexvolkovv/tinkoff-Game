@@ -8,6 +8,8 @@ import { getGame } from '../../store/reducers/game/actionCreators'
 import { useInterval } from '../../hooks/useInterval'
 import { setGame } from '../../store/reducers/game/gameSlice'
 import { LoadingModal } from '../LoadingModal/LoadingModal'
+import { Modal } from '../UI/Modal/Modal'
+import { GameOverModal } from './GameOverModal/GameOverModal'
 
 export const Game = memo(() => {
   const { game } = useAppSelector((state) => state.gameReducer)
@@ -47,11 +49,19 @@ export const Game = memo(() => {
         opponent={game?.opponent!}
         currentUserTurn={game?.currentUserTurnId!}
       />
-      <Decks
-        currentCard={game?.currentCard!}
-        currentUserTurn={game?.currentUserTurnId!}
-      />
+      <Decks game={game} />
       <UserCards game={game} />
+
+      {game.isOver && (
+        <Modal
+          setModalVisible={() => {
+            console.log('dsadas')
+          }}
+          canExit={false}
+        >
+          <GameOverModal />
+        </Modal>
+      )}
     </div>
   )
 })

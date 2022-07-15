@@ -1,23 +1,26 @@
 import React, { FC, memo } from 'react'
 import { Card } from '../Card/Card'
-import { CardType } from '../../../models/CardType'
 import styles from './Decks.module.scss'
-import { useAppSelector } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { takeRandomCard } from '../../../store/reducers/game/actionCreators'
+import { GameType } from '../../../models/GameType'
 
 type DecksProps = {
-  currentCard: CardType
-  currentUserTurn: number
+  game: GameType
 }
 
 export const Decks: FC<DecksProps> = memo(
-  ({ currentCard, currentUserTurn }) => {
+  ({ game }) => {
     const { user } = useAppSelector((state) => state.userReducer)
-    const isUserTurn = user?.id === currentUserTurn
+    const isUserTurn = user?.id === game.currentUserTurnId
+    const dispatch = useAppDispatch()
 
     const bankDeckClick = () => {
       if (!isUserTurn) {
         return
       }
+
+      dispatch(takeRandomCard({ userId: user?.id!, gameId: game.id }))
     }
 
     return (
@@ -30,14 +33,11 @@ export const Decks: FC<DecksProps> = memo(
           />
         </div>
 
-        <Card card={currentCard} isClickable={false} />
+        <Card card={game.currentCard} isClickable={false} />
       </div>
     )
   },
   (prevProps, nextProps) => {
-    return (
-      prevProps.currentCard.id === nextProps.currentCard.id &&
-      prevProps.currentUserTurn === nextProps.currentUserTurn
-    )
+    return JSON.stringify(prevProps.game) === JSON.stringify(nextProps.game)
   }
 )
