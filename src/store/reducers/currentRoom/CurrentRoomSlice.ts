@@ -34,14 +34,8 @@ export const currentRoomSlice = createSlice({
     builder.addCase(
       getCurrentRoom.fulfilled,
       (state, action: PayloadAction<RoomType>) => {
-        if (action.payload.maxCount > action.payload.count) {
-          state.currentRoom = action.payload
-          state.error = ''
-        } else {
-          state.currentRoom = null
-          state.error = 'Достигнуто максимальное количество игроков'
-        }
-
+        state.currentRoom = action.payload
+        state.error = ''
         state.isLoading = false
       }
     )
