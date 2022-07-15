@@ -21,7 +21,7 @@ export const UserCards: FC<UserCardsProps> = memo(
     return (
       <div className={styles.wrap}>
         <div className={nameStyles.join(' ')}>{user?.name}</div>
-        <div className={styles.border}></div>
+        <div className={styles.line}></div>
         <div className={styles.cards}>
           {userCards &&
             userCards.map((card) => <Card key={card.id} card={card} />)}

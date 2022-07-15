@@ -28,7 +28,7 @@ export const OpponentCards: FC<OpponentCardsProps> = memo(
     return (
       <div className={wrapStyles.join(' ')}>
         <div className={nameStyles.join(' ')}>{opponent.name}</div>
-        <div className={userCardStyles.border}></div>
+        <div className={userCardStyles.line}></div>
         <div className={userCardStyles.cards}>{cards}</div>
       </div>
     )
