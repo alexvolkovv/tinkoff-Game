@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GameType } from '../../../models/GameType'
-import { getGame } from './actionCreators'
+import { changeGame, getGame } from './actionCreators'
 
 type GameState = {
   game: GameType | null
@@ -41,6 +41,28 @@ export const gameSlice = createSlice({
       state.error = action.payload
       alert(action.payload)
     })
+
+    builder.addCase(changeGame.pending, (state) => {
+      state.isLoading = true
+    })
+
+    builder.addCase(
+      changeGame.fulfilled,
+      (state, action: PayloadAction<GameType>) => {
+        state.game = action.payload
+        state.isLoading = false
+        state.error = ''
+      }
+    )
+
+    builder.addCase(
+      changeGame.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.isLoading = false
+        state.error = action.payload
+        alert(action.payload)
+      }
+    )
   },
 })
 

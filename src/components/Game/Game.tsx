@@ -47,11 +47,11 @@ export const Game = memo(() => {
         opponent={game?.opponent!}
         currentUserTurn={game?.currentUserTurnId!}
       />
-      <Decks currentCard={game?.currentCard!} />
-      <UserCards
-        userCards={game?.userCards!}
+      <Decks
+        currentCard={game?.currentCard!}
         currentUserTurn={game?.currentUserTurnId!}
       />
+      <UserCards game={game} />
     </div>
   )
 })

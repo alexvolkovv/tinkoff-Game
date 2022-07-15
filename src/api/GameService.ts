@@ -1,5 +1,8 @@
 import { host } from './index'
-import { GetGameRequest } from '../store/reducers/game/actionCreators'
+import {
+  ChangeGameRequest,
+  GetGameRequest,
+} from '../store/reducers/game/actionCreators'
 import { GameType } from '../models/GameType'
 
 export class GameService {
@@ -7,5 +10,9 @@ export class GameService {
     return await host.get<GameType>(
       `game?roomId=${data.roomId}&userId=${data.userId}`
     )
+  }
+
+  static async changeGame(data: ChangeGameRequest): Promise<GameType> {
+    return await host.put<GameType>(`game`, data)
   }
 }
