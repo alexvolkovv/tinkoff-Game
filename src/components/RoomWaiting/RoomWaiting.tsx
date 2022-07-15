@@ -1,25 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { getCurrentRoom } from '../../store/reducers/currentRoom/actionCreators'
+import React from 'react'
+import { useAppSelector } from '../../hooks/redux'
 
 export const RoomWaiting = () => {
   const { currentRoom } = useAppSelector((state) => state.currentRoomReducer)
-  const dispatch = useAppDispatch()
-  const startWaiting = useCallback(
-    () =>
-      setInterval(() => {
-        dispatch(getCurrentRoom(currentRoom?.id!))
-      }, 500),
-    []
-  )
 
-  useEffect(() => {
-    let interval = startWaiting()
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
   return (
     <div className={'main-container'}>
       <div style={{ color: 'white' }}>
