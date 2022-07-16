@@ -19,7 +19,9 @@ export const OpponentCards: FC<OpponentCardsProps> = memo(
       const cards = []
 
       for (let i = 0; i < opponent.cardCount; i++) {
-        cards.push(<Card key={Math.random()} isUnknown={true} />)
+        cards.push(
+          <Card isClickable={false} key={Math.random()} isUnknown={true} />
+        )
       }
 
       return cards

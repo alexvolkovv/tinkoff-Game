@@ -10,21 +10,25 @@ type CardProps = {
   [attribute: string]: any
 }
 
-export const Card: FC<CardProps> = memo(({ card, isUnknown, click }) => {
-  return (
-    <div
-      className={styles.card}
-      onClick={() => {
-        if (click) {
-          click()
-        }
-      }}
-    >
-      {isUnknown ? (
-        <img src={backCard} alt="Unknown card" />
-      ) : (
-        <img src={card?.img} alt="Card" />
-      )}
-    </div>
-  )
-})
+export const Card: FC<CardProps> = memo(
+  ({ card, isUnknown, click, isClickable }) => {
+    const classes = [styles.card, isClickable ? styles.clickable : '']
+
+    return (
+      <div
+        className={classes.join(' ')}
+        onClick={() => {
+          if (click) {
+            click()
+          }
+        }}
+      >
+        {isUnknown ? (
+          <img src={backCard} alt="Unknown card" />
+        ) : (
+          <img src={card?.img} alt="Card" />
+        )}
+      </div>
+    )
+  }
+)
