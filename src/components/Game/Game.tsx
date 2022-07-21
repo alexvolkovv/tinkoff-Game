@@ -47,18 +47,13 @@ export const Game = memo(() => {
     <div className={styles.game + ' ' + styles[game?.currentCard?.color!]}>
       <OpponentCards
         opponent={game?.opponent!}
-        currentUserTurn={game?.currentUserTurnId!}
+        currentUserTurn={game?.currentPlayerTurnId!}
       />
       <Decks game={game} />
-      <UserCards game={game} />
+      <UserCards game={game} room={currentRoom!} />
 
-      {game.isOver && (
-        <Modal
-          setModalVisible={() => {
-            console.log('dsadas')
-          }}
-          canExit={false}
-        >
+      {game.over && (
+        <Modal setModalVisible={() => {}} canExit={false}>
           <GameOverModal />
         </Modal>
       )}

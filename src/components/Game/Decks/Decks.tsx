@@ -12,7 +12,8 @@ type DecksProps = {
 export const Decks: FC<DecksProps> = memo(
   ({ game }) => {
     const { user } = useAppSelector((state) => state.userReducer)
-    const isUserTurn = user?.id === game.currentUserTurnId
+    const { currentRoom } = useAppSelector((state) => state.currentRoomReducer)
+    const isUserTurn = user?.id === game.currentPlayerTurnId
     const dispatch = useAppDispatch()
 
     const bankDeckClick = () => {
@@ -20,7 +21,7 @@ export const Decks: FC<DecksProps> = memo(
         return
       }
 
-      dispatch(takeRandomCard({ userId: user?.id!, gameId: game.id }))
+      dispatch(takeRandomCard({ userId: user?.id!, roomId: currentRoom?.id! }))
     }
 
     return (
@@ -28,7 +29,9 @@ export const Decks: FC<DecksProps> = memo(
         <div className={styles.bankDeck}>
           <Card
             isUnknown={true}
-            click={bankDeckClick}
+            click={() => {
+              bankDeckClick()
+            }}
             isClickable={isUserTurn}
           />
         </div>
