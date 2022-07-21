@@ -1,7 +1,5 @@
 .cards {
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 15px;
   max-width: 80vw;
   overflow-x: auto;
@@ -35,7 +33,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
 }
 
 .wrapReverse {
