@@ -45,7 +45,6 @@ export const takeRandomCard = createAsyncThunk(
   'game/takeRandomCard',
   async (data: TakeRandomCardRequest, thunkApi) => {
     try {
-      console.log(data)
       return await GameService.takeRandomCard(data)
     } catch (e) {
       return thunkApi.rejectWithValue('Не удалось взять карту')

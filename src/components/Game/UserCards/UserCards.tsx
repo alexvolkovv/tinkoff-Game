@@ -74,7 +74,7 @@ export const UserCards: FC<UserCardsProps> = memo(
         </div>
 
         {visibleSelectColorModal && (
-          <Modal setModalVisible={setVisibleSelectColorModal} canExit={false}>
+          <Modal setModalVisible={setVisibleSelectColorModal} canExit={true}>
             <SelectColorModal
               card={turnedCard!}
               setModalVisible={setVisibleSelectColorModal}
