@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from 'react'
+import React, { FC, memo, useCallback, useState } from 'react'
 import { CardType } from '../../../models/CardType'
 import { Card } from '../Card/Card'
 import styles from './UserCards.module.scss'
@@ -7,6 +7,8 @@ import userCardStyles from './UserCards.module.scss'
 import { GameType } from '../../../models/GameType'
 import { changeGame } from '../../../store/reducers/game/actionCreators'
 import { RoomType } from '../../../models/RoomType'
+import { Modal } from '../../UI/Modal/Modal'
+import { SelectColorModal } from './SelectColorModal/SelectColorModal'
 
 type UserCardsProps = {
   game: GameType
@@ -22,9 +24,17 @@ export const UserCards: FC<UserCardsProps> = memo(
       isUserTurn ? userCardStyles.changingOpacity : '',
     ]
     const dispatch = useAppDispatch()
+    const [visibleSelectColorModal, setVisibleSelectColorModal] =
+      useState<boolean>()
+    const [turnedCard, setTurnedCard] = useState<CardType | null>(null)
 
     const turnCard = useCallback((turnedCard: CardType) => {
-      console.log('click')
+      if (turnedCard.cardValue == '+4' || turnedCard.cardValue == 'color') {
+        setVisibleSelectColorModal(true)
+
+        return
+      }
+
       dispatch(
         changeGame({
           userId: user?.id!,
@@ -55,12 +65,22 @@ export const UserCards: FC<UserCardsProps> = memo(
                   click={() => {
                     if (isUserTurn && canUserTurn) {
                       turnCard(card)
+                      setTurnedCard(card)
                     }
                   }}
                 />
               )
             })}
         </div>
+
+        {visibleSelectColorModal && (
+          <Modal setModalVisible={setVisibleSelectColorModal} canExit={false}>
+            <SelectColorModal
+              card={turnedCard!}
+              setModalVisible={setVisibleSelectColorModal}
+            />
+          </Modal>
+        )}
       </div>
     )
   },

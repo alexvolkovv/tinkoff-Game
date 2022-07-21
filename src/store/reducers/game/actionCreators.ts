@@ -10,6 +10,7 @@ export type ChangeGameRequest = {
   userId: number
   roomId: number
   cardId: number
+  newColor?: string
 }
 
 export type TakeRandomCardRequest = {
