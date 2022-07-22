@@ -2,6 +2,7 @@ import React, { FC, memo } from 'react'
 import { CardType } from '../../../models/CardType'
 import styles from './Card.module.scss'
 import backCard from '../../../assets/game/cards/card-back.png'
+import { apiURL } from '../../../utils/api'
 
 type CardProps = {
   card?: CardType
@@ -26,7 +27,7 @@ export const Card: FC<CardProps> = memo(
         {isUnknown ? (
           <img src={backCard} alt="Unknown card" />
         ) : (
-          <img src={card?.img} alt="Card" />
+          <img src={apiURL + '/' + card?.img} alt="Card" />
         )}
       </div>
     )

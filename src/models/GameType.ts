@@ -11,6 +11,6 @@ export type GameType = {
   currentCard: CardType
   userCards: CardType[]
   opponent: OpponentType
-  currentUserTurnId: number
-  isOver: boolean
+  currentPlayerTurnId: number
+  over: boolean
 }

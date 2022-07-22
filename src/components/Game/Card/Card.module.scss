@@ -1,9 +1,17 @@
 .card {
+  transition: 0.2s all;
+  transform-origin: 50% 50%;
   img {
     width: 5vw;
   }
+  
+
 }
 
 .clickable {
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }

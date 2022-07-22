@@ -14,12 +14,12 @@ export class GameService {
   }
 
   static async changeGame(data: ChangeGameRequest): Promise<GameType> {
-    return await host.put<GameType>(`game`, data)
+    return await host.put<GameType>(`game/card`, data)
   }
 
   static async takeRandomCard(data: TakeRandomCardRequest): Promise<GameType> {
     return await host.get<GameType>(
-      `game/card?userId=${data.userId}&gameId=${data.gameId}`
+      `game/card?userId=${data.userId}&roomId=${data.roomId}`
     )
   }
 }

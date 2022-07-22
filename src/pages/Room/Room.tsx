@@ -29,6 +29,10 @@ export const Room: FC = () => {
     dispatch(changeUser(userWithNullRoom))
   }, [])
 
+  const onBeforeUnload = useCallback(() => {
+    leaveRoom()
+  }, [])
+
   const startListening = useInterval(() => {
     dispatch(getCurrentRoom(currentRoom?.id!))
   }, 1000)
@@ -36,7 +40,13 @@ export const Room: FC = () => {
   useEffect(() => {
     let interval = startListening()
 
+    window.addEventListener('unload', onBeforeUnload)
+    window.onbeforeunload = () => {
+      onBeforeUnload()
+    }
+
     return () => {
+      leaveRoom()
       clearInterval(interval)
     }
   }, [])
@@ -51,10 +61,6 @@ export const Room: FC = () => {
     }
 
     dispatch(changeUser(changedUser))
-
-    return () => {
-      leaveRoom()
-    }
   }, [])
 
   return (

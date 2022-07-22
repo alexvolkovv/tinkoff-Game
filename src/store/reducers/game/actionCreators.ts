@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { GameService } from '../../../api/GameService'
-import { GameType } from '../../../models/GameType'
 
 export type GetGameRequest = {
   roomId: number
@@ -9,12 +8,14 @@ export type GetGameRequest = {
 
 export type ChangeGameRequest = {
   userId: number
-  game: GameType
+  roomId: number
+  cardId: number
+  newColor?: string
 }
 
 export type TakeRandomCardRequest = {
   userId: number
-  gameId: number
+  roomId: number
 }
 
 export const getGame = createAsyncThunk(
@@ -32,6 +33,7 @@ export const changeGame = createAsyncThunk(
   'game/changeGame',
   async (data: ChangeGameRequest, thunkApi) => {
     try {
+      console.log(data)
       return await GameService.changeGame(data)
     } catch (e) {
       return thunkApi.rejectWithValue('Не удалось обновить игру')
