@@ -22,3 +22,34 @@ export const createCurrentRoom = createAsyncThunk(
     }
   }
 )
+
+let interval: any = null
+
+export const startListeningRoom = createAsyncThunk(
+  'currentRoom/startListeningRoom',
+  async (roomId: number, thunkApi) => {
+    try {
+      clearInterval(interval)
+      interval = setInterval(() => {
+        thunkApi.dispatch(getCurrentRoom(roomId))
+      }, 1000)
+
+      return thunkApi.fulfillWithValue('Таймер создан')
+    } catch (e) {
+      return thunkApi.rejectWithValue('Не удалось задать таймер')
+    }
+  }
+)
+
+export const stopListeningRoom = createAsyncThunk(
+  'currentRoom/stopListeningRoom',
+  async (_, thunkApi) => {
+    try {
+      clearInterval(interval)
+
+      return thunkApi.fulfillWithValue('Таймер очищен')
+    } catch (e) {
+      return thunkApi.rejectWithValue('Не удалось очистить таймер')
+    }
+  }
+)
