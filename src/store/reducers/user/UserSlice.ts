@@ -41,7 +41,6 @@ export const userSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
-        alert(action.payload)
       }
     )
 
@@ -63,7 +62,6 @@ export const userSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
-        alert(action.payload)
       }
     )
   },

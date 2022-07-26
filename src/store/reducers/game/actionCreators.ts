@@ -51,3 +51,35 @@ export const takeRandomCard = createAsyncThunk(
     }
   }
 )
+
+let interval: any = null
+
+export const startListeningGame = createAsyncThunk(
+  'game/startListeningGame',
+  async (data: GetGameRequest, thunkApi) => {
+    try {
+      clearInterval(interval)
+
+      interval = setInterval(() => {
+        thunkApi.dispatch(getGame(data))
+      }, 1000)
+
+      return thunkApi.fulfillWithValue('Таймер создан')
+    } catch (e) {
+      return thunkApi.rejectWithValue('Не удалось задать таймер')
+    }
+  }
+)
+
+export const stopListeningGame = createAsyncThunk(
+  'game/stopListeningGame',
+  async (_, thunkApi) => {
+    try {
+      clearInterval(interval)
+
+      return thunkApi.fulfillWithValue('Таймер очищен')
+    } catch (e) {
+      return thunkApi.rejectWithValue('Не удалось очистить таймер')
+    }
+  }
+)

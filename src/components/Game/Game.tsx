@@ -4,8 +4,11 @@ import { UserCards } from './UserCards/UserCards'
 import { OpponentCards } from './OpponentCards/OpponentCards'
 import { Decks } from './Decks/Decks'
 import styles from './Game.module.scss'
-import { getGame } from '../../store/reducers/game/actionCreators'
-import { useInterval } from '../../hooks/useInterval'
+import {
+  getGame,
+  startListeningGame,
+  stopListeningGame,
+} from '../../store/reducers/game/actionCreators'
 import { setGame } from '../../store/reducers/game/gameSlice'
 import { LoadingModal } from '../LoadingModal/LoadingModal'
 import { Modal } from '../UI/Modal/Modal'
@@ -17,21 +20,18 @@ export const Game = memo(() => {
   const { user } = useAppSelector((state) => state.userReducer)
   const dispatch = useAppDispatch()
 
-  const startListening = useInterval(() => {
-    dispatch(
-      getGame({
-        userId: user?.id!,
-        roomId: currentRoom?.id!,
-      })
-    )
-  }, 1000)
-
   useEffect(() => {
-    const interval = startListening()
+    const game = {
+      userId: user?.id!,
+      roomId: currentRoom?.id!,
+    }
+
+    dispatch(getGame(game))
+    dispatch(startListeningGame(game))
 
     return () => {
       dispatch(setGame(null))
-      clearInterval(interval)
+      dispatch(stopListeningGame())
     }
   }, [])
 

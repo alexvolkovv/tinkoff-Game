@@ -5,9 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { UserType } from '../../models/UserType'
 import { changeUser } from '../../store/reducers/user/actionCreators'
 import { RoomWaiting } from '../../components/RoomWaiting/RoomWaiting'
-import { getCurrentRoom } from '../../store/reducers/currentRoom/actionCreators'
+import {
+  getCurrentRoom,
+  startListeningRoom,
+  stopListeningRoom,
+} from '../../store/reducers/currentRoom/actionCreators'
 import { Game } from '../../components/Game/Game'
-import { useInterval } from '../../hooks/useInterval'
 import { Button, ButtonTypes } from '../../components/UI/Button/Button'
 import styles from './Room.module.scss'
 
@@ -33,12 +36,9 @@ export const Room: FC = () => {
     leaveRoom()
   }, [])
 
-  const startListening = useInterval(() => {
-    dispatch(getCurrentRoom(currentRoom?.id!))
-  }, 1000)
-
   useEffect(() => {
-    let interval = startListening()
+    dispatch(getCurrentRoom(currentRoom?.id!))
+    dispatch(startListeningRoom(currentRoom?.id!))
 
     window.addEventListener('unload', onBeforeUnload)
     window.onbeforeunload = () => {
@@ -47,7 +47,7 @@ export const Room: FC = () => {
 
     return () => {
       leaveRoom()
-      clearInterval(interval)
+      dispatch(stopListeningRoom())
     }
   }, [])
 
