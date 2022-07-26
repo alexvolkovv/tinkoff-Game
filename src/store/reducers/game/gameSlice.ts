@@ -39,7 +39,6 @@ export const gameSlice = createSlice({
     builder.addCase(getGame.rejected, (state, action: PayloadAction<any>) => {
       state.isLoading = false
       state.error = action.payload
-      alert(action.payload)
     })
 
     builder.addCase(changeGame.pending, (state) => {
@@ -60,7 +59,6 @@ export const gameSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
-        alert(action.payload)
       }
     )
 
@@ -82,7 +80,6 @@ export const gameSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
-        alert(action.payload)
       }
     )
   },
